@@ -2,6 +2,10 @@
 
 require_once dirname(__FILE__).'/cli.php';
 
+$build=path(dirname(__FILE__),'build');
+
+rmk($build);
+
 $paths=array();
 
 push_array($paths,scan_require(dirname(__FILE__).'/framework'));
@@ -14,8 +18,8 @@ foreach($paths as $path)
  $single.=load($path);
 }
 
-$path_stub=dirname(__FILE__).'/build/index.php';
-$path_stub_debug=dirname(__FILE__).'/build/index-d.php';
+$path_stub=path($build,'index.php');
+$path_stub_debug=path($build,'index-d.php');
 
 save($path_stub,$single);
 save($path_stub_debug,$single);
