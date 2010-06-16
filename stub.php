@@ -2,6 +2,8 @@
 
 require_once dirname(__FILE__).'/cli.php';
 
+//if(defined('build_number'))
+//define('build_number',
 $build=path(dirname(__FILE__),'build');
 
 rmk($build);
