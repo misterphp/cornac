@@ -11,6 +11,8 @@ function shell()
  
  exec($command,$result);
  
+ clearstatcache(); 
+ 
  return $result;
 }
 
@@ -22,6 +24,8 @@ function pass_thru()
  
  println($command);
  passthru($command);
+ 
+ clearstatcache(); 
 }
 
 ?>

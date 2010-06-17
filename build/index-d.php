@@ -334,6 +334,54 @@ function push_array(&$array,$item)
 ?>
 <?php
 
+function compress()
+{
+ $arguments=func_get_args();
+ $result=null;
+
+ if(count($arguments)===0)
+  return $result;
+
+ if(count($arguments)===1)
+  $arguments=$arguments[0];
+
+ $result=serialize($arguments);
+ $result=gzcompress($result,9);
+ $result=base64_encode($result);
+ $result=rawurlencode($result);
+
+ return $result;
+}
+
+function uncompress($compressed)
+{
+ if(!is_s($compressed))
+  return false;
+
+ $result=$compressed;
+ $result=rawurldecode($result);
+ $result=base64_decode($result);
+
+ try
+ {
+  $result=@gzuncompress($result);
+ }
+ catch(Exception $exception)
+ {
+  $result=false;
+ }
+
+ if($result===false)
+  return $result;
+
+ $result=unserialize($result);
+
+ return $result;
+}
+
+?>
+<?php
+
 function load($path)
 {
  return file_get_contents($path);
@@ -351,6 +399,19 @@ function path()
  
  $result=implode('/',$arguments);
  $result=str_replace('//','/',$result);
+ 
+ return $result;
+}
+
+function real_path()
+{
+ $arguments=func_get_args();
+ 
+ $path=call('path',$arguments);
+ 
+ $result=realpath($path);
+ 
+ check(is_s($result));
  
  return $result;
 }
@@ -798,6 +859,8 @@ class PipeTag extends SeparatorTag
 
 ?>
 <?php
+$_build_number=5;
+?><?php
 
 class Page
 {
@@ -975,6 +1038,7 @@ function main()
   $page->menu_quick->add('a')->href('http://abiven.marc.free.fr/')->text('abiven');
 
   $page->content->add('h1')->text('coucou');
+  $page->content->add('div')->text('build',$GLOBALS['_build_number']);
   
   echo $page->export();
 /*  

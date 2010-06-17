@@ -10,6 +10,8 @@ function mk_dir()
   check(mkdir($path,0777,true),$path);
   
  check(chmod($path,0777));
+ 
+ clearstatcache();
 }
 
 function rmk()

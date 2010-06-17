@@ -21,6 +21,7 @@ function main()
   $page->menu_quick->add('a')->href('http://abiven.marc.free.fr/')->text('abiven');
 
   $page->content->add('h1')->text('coucou');
+  $page->content->add('div')->text('build',$GLOBALS['_build_number']);
   
   echo $page->export();
 /*  

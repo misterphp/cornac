@@ -2,11 +2,24 @@
 
 require_once dirname(__FILE__).'/cli.php';
 
-//if(defined('build_number'))
-//define('build_number',
+$build_number=build_number();
+$build_number++;
+
+$build_php=path(dirname(__FILE__),'cornac/a/build.php');
+
+$lines=array();
+
+$lines[]='<?php';
+$lines[]='$_build_number='.$build_number.';';
+$lines[]='?>';
+
+save($build_php,implode(crlf,$lines));
+
 $build=path(dirname(__FILE__),'build');
 
 rmk($build);
+
+build_number($build_number);
 
 $paths=array();
 

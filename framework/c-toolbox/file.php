@@ -21,6 +21,19 @@ function path()
  return $result;
 }
 
+function real_path()
+{
+ $arguments=func_get_args();
+ 
+ $path=call('path',$arguments);
+ 
+ $result=realpath($path);
+ 
+ check(is_s($result));
+ 
+ return $result;
+}
+
 function umod($path)
 {
  $normal=null;
