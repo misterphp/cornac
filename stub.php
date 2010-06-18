@@ -57,8 +57,8 @@ println();
 pass_thru('php','-l',$path_stub_debug);
 println();
 
-println('compress',filesize($path_stub));
-println('debug',filesize($path_stub_debug));
-println('ratio',(int)((filesize($path_stub_debug)/filesize($path_stub)-1)*100),'%');
+println('compress',file_size($path_stub));
+println('debug',file_size($path_stub_debug));
+println('ratio',(int)((file_size($path_stub_debug)/file_size($path_stub)-1)*100),'%');
 
 ?>

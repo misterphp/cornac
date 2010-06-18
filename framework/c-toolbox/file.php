@@ -11,6 +11,26 @@ function save($path,$content)
  chmod($path,0666);
 }
 
+function file_size()
+{
+ $arguments=func_get_args();
+ 
+ $path=call('path',$arguments);
+ 
+ check(is_file($path));
+ 
+ $result=filesize($path);
+ 
+ check(is_int($result));
+ 
+ $result=sprintf('%u',$result);
+ $result=(float)$result;
+ 
+ check($result>=0);
+ 
+ return $result;
+}
+
 function path()
 {
  $arguments=func_get_args();
